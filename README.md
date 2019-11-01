@@ -20,6 +20,7 @@ $ py -m venv poll
 4) Activate your virtual environment
 
 $ poll\Scripts\activate
+
 This should prepend "(poll)" to the start of the prompt
 
 5) Install the requirements
