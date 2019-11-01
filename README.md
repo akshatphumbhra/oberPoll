@@ -10,26 +10,28 @@ A polling web application for improved classroom interactions.
 # Set-up Instructions
 
 1) Clone the repository
-2) cd into it
-3) Create a virtual environment with:
 <br>
-          $ py -m venv poll
+2) cd into it
+<br>
+3) Create a virtual environment with:
+
+$ py -m venv poll
 
 4) Activate your virtual environment
-<br>
-          $ poll\Scripts\activate
-  This should prepend "(poll)" to the start of the prompt
 
+$ poll\Scripts\activate
+This should prepend "(poll)" to the start of the prompt
+<br>
 5) Install the requirements
-<br>
-          $ pip install -r requirements.txt
 
+$ pip install -r requirements.txt
+<br>
 6) Set the variable "FLASK_APP" to the name of the app
-<br>
-          $ set FLASK_APP=oberPoll.py
 
+$ set FLASK_APP=oberPoll.py
+<br>
 7) Run the app with:
-<br>
-          $ flask run
 
+$ flask run
+<br>
 8) Navigate to the required url in your browser. By default this url is http://127.0.0.1:5000/
