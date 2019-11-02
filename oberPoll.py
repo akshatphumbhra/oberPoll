@@ -4,7 +4,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "<h1> Hello, World! </h1>"
+    return render_template("index.html")
 
+@app.route('/Akshat')
+def akshat():
+    return "<h1> Henry sucks!</h1>"
 if __name__ == "__main__":
     app.run(debug=True)
