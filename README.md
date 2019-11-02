@@ -27,12 +27,14 @@ This should prepend "(poll)" to the start of the prompt
 
 $ pip install -r requirements.txt
 
-6) Set the variable "FLASK_APP" to the name of the app
+6) Run the python app:
 
-$ set FLASK_APP=oberPoll.py
+$ python3 oberPoll.py
 
-7) Run the app with:
+        OR
 
-$ flask run
+$ python oberPoll.py
 
-8) Navigate to the required url in your browser. By default this url is http://127.0.0.1:5000/
+Depending on your Python settings
+
+7) Navigate to the required url in your browser. By default this url is http://127.0.0.1:5000/
