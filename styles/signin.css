@@ -1,0 +1,21 @@
+*{padding:0; margin:0; border:0}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:700,700i|Staatliches');
+
+.background {
+	background-image: url("https://www.oberlin.edu/sites/default/files/styles/width_1600/public/content/home/header-video-cover-image/aerial_1600w_q50.jpg?itok=vEGlNNhL");
+	height: 100%;
+	filter:blur(2px);
+	opacity: 0.6;
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	top:-10px;
+	z-index: -1;
+}
+
+.page-header {
+	color: black;
+	font-family: 'Staatliches', sans-serif;
+	background-repeat: no-repeat;
+}
