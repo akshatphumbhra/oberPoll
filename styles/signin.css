@@ -2,18 +2,19 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:700,700i|Staatliches');
 
-.background {
-	background-image: url("https://www.oberlin.edu/sites/default/files/styles/width_1600/public/content/home/header-video-cover-image/aerial_1600w_q50.jpg?itok=vEGlNNhL");
-	height: 100%;
-	filter:blur(2px);
-	opacity: 0.6;
-	background-size: cover;
-	background-position: center;
-	position: absolute;
-	top:-10px;
-	z-index: -1;
+body {
+	background-color: #282828;
+	color: white;
 }
 
+.logo {
+	height: 150px;
+	position: inherit;
+}
+
+form{
+	padding-top: 100px;
+}
 .page-header {
 	color: black;
 	font-family: 'Staatliches', sans-serif;
