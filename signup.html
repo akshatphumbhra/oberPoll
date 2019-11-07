@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+	
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./styles/signup.css">
+	</head>
+	
+	<body>
+				
+				<!-- Default form register -->
+		<form class="text-center border border-light p-5 container" action="#!">
+			
+			<img class="logo" src="https://www.drupal.org/files/OC%20Standard%20Logo%20BLACK%20RGB.png">
+		
+			<p class="h4 mb-4" style="padding-top: 10px">Sign up</p>
+		
+			<div class="form-row mb-4 text-left">
+				<div class="col" style="padding-bottom: 10px">
+					<!-- First name -->
+					<label for="defaultLoginFormEmail">First Name</label>
+					<input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+				</div>
+				<div class="col" style="padding-bottom: 10px">
+					<!-- Last name -->
+					<label for="defaultLoginFormEmail">Last Name</label>
+					<input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+				</div>
+			</div>
+		
+			<!-- E-mail -->
+			<div class="text-left" style="padding-bottom: 10px">
+				<label for="defaultLoginFormEmail">E-mail Address</label>
+				<input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+			</div>
+			<!-- Password -->
+			<div class="text-left" style="padding-bottom: 10px">
+				<label for="defaultLoginFormEmail">Password</label>
+				<input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+			</div>
+			
+			<div class="text-left" style="padding-bottom: 10px">
+				<label for="defaultLoginFormEmail">Confirm Password</label>
+				<input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+			</div>
+			
+			<p class="h4 mb-4" style="padding-top: 10px">Are you a...</p>
+		
+			<fieldset class="form-group">
+				<div class="row">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+						<label class="form-check-label" for="gridRadios1">Student</label>
+					</div>
+					
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+						<label class="form-check-label" for="gridRadios1">Teacher</label>
+					</div>
+				</div>
+			</fieldset>
+		
+			<!-- Sign up button -->
+			<div>
+				<button class="btn btn-danger" type="submit">Sign Up</button>
+			</div>
+		</form>
+		<!-- Default form register -->
+	</body>
+</html>

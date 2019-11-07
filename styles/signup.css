@@ -1,0 +1,17 @@
+*{padding:0; margin:0; border:0}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:700,700i|Staatliches');
+
+body {
+	background-color: #282828;
+	color: white;
+}
+
+.logo {
+	height: 150px;
+	position: inherit;
+}
+
+form {
+	padding-top: 100px;
+}
