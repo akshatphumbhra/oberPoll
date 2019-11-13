@@ -1,4 +1,5 @@
 from flask import *
+from app.models import User
 
 #SQLAlchemy- -Database
 #https://www.youtube.com/watch?v=QjtW-wnXlUY -- Tutorial
@@ -11,15 +12,19 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'\
 
 db=SQLAlchemy(app) #creates database db
 
+u = User(username='Henry', email='Hsieber@oberlin.edu')
+
+print(u)
+
 
 @app.route('/')
-class index():
-     id = db.Column(db.Integer, primary_key=True, unique=true, nullable=true) #does true and false need to be True and False
-     name = db.Column(db.String(20), unique=true, nullable = false)
-    # db.add({"name":"Akshat"})
-    # db.commit()
-    # print(db.query(1))
-    return render_template("index.html")
+# class index():
+#      id = db.Column(db.Integer, primary_key=True, unique=true, nullable=true) #does true and false need to be True and False
+#      name = db.Column(db.String(20), unique=true, nullable = false)
+#     # db.add({"name":"Akshat"})
+#     # db.commit()
+#     # print(db.query(1))
+#     return render_template("index.html")
 
 @app.route('/Akshat')
 def akshat():
