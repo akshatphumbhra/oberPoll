@@ -1,6 +1,6 @@
 from flask import *
 from models import db, Users
-from werkzeug.secrity import generate_password_hash, check_password_hash
+from werkzeug import generate_password_hash, check_password_hash
 
 oberPoll = Flask(__name__)
 
@@ -75,6 +75,9 @@ def logout():
 
     return redirect(url_for('home'))
 
+@oberPoll.route('/createpoll', methods=['GET'])
+def createPoll():
+    return render_template('createpoll.html')
 
 if __name__ == "__main__":
     oberPoll.run()
