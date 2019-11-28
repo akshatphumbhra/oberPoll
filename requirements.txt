@@ -2,3 +2,4 @@ flask
 nose
 Flask-testing
 flask_sqlalchemy
+Werkzeug==0.16.0
