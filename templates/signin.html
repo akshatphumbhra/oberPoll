@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 
 <html>
-  
+
 	<head>
       <meta charset = "utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-			<link rel="stylesheet" type="text/css" href="./styles/signin.css">
+			<link rel="stylesheet" type="text/css" href="./static/css/signin.css">
   </head>
-  
+
   <body>
-   
+
     <!-- Default form login -->
 	<form class="text-center border border-light p-5 container" action="#!" style="padding-left: 100px; padding-right: 100px">
 			<img class="logo" src="https://www.drupal.org/files/OC%20Standard%20Logo%20BLACK%20RGB.png">
-	
+
 			<p class="h4 mb-4" style="padding-top: 50px;">Sign in</p>
-	
-			<!-- Email -->  
+
+			<!-- Email -->
 			<div class= "text-left" style= "padding-bottom: 5px">
 				<label for="defaultLoginFormEmail">E-mail Address</label>
-				<input type="email" id="defaultLoginFormEmail" placeholder="Enter Email" class="form-control">
+				<input type="email" id="email" placeholder="Enter Email" class="form-control">
 			</div>
 			<!-- Password -->
 			<div class="text-left" style="padding-top:5px; padding-bottom:5px">
 				<label for="defaultLoginFormPassword">Password</label>
-				<input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+				<input type="password" id="password" class="form-control mb-4" placeholder="Password">
 			</div>
-			
+
 			<div class="d-flex justify-content-around" style= "padding-top: 5px">
 					<div>
 							<!-- Remember me -->
@@ -41,20 +41,20 @@
 							<a href="">Forgot password?</a>
 					</div>
 			</div>
-	
+
 			<!-- Sign in button  add value = submit?-->
 			<div>
 				<button class="btn btn-danger" type="submit">Sign in</button>
 			</div>
-	
+
 			<!-- Register -->
 			<p>Not a member?
-					<a href="">Register</a>
+					<a href="{{ url_for('signup') }}">Register</a>
 			</p>
-	
-	
+
+
 	</form>
 	<!-- Default form login -->
-    
+
   </body>
 </html>
