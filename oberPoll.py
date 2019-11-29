@@ -1,6 +1,7 @@
 from flask import *
-from models import db, Users
-from werkzeug import generate_password_hash, check_password_hash
+from models import db, Users, Polls, Topics, Options, UserPolls
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_migrate import Migrate
 
 oberPoll = Flask(__name__)
 
@@ -9,6 +10,8 @@ oberPoll.config.from_object('config')
 
 db.init_app(oberPoll)
 db.create_all(app=oberPoll)
+
+migrate = Migrate(oberPoll, db, render_as_batch=True)
 
 @oberPoll.route('/')
 def home():
@@ -45,6 +48,10 @@ def signup():
 #     # print(db.query(1))
 #     return render_template("index.html")
 
+@oberPoll.route('/favicon.ico')
+def test():
+    return "This sucks!"
+
 @oberPoll.route('/login', methods =['POST'])
 def login():
 
@@ -75,9 +82,13 @@ def logout():
 
     return redirect(url_for('home'))
 
-@oberPoll.route('/createpoll', methods=['GET'])
+@oberPoll.route('/polls', methods=['GET'])
 def createPoll():
     return render_template('createpoll.html')
+
+@oberPoll.route('/polls/<poll_name>')
+def poll():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     oberPoll.run()
