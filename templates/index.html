@@ -10,7 +10,9 @@
 
       <title>OberPoll!</title>
 
+    <script src="https://npmcdn.com/react-router@2.8.1/umd/ReactRouter.min.js"></script>
     <script src="./static/js/ie-emulation-modes-warning.js"></script>
+
   </head>
 
   <body>
@@ -25,7 +27,7 @@
               <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
 
-            <li role="presentation"><a href="/createpoll">Polls</a></li>
+            <li role="presentation"><a href="/polls">Polls</a></li>
             <li role="presentation"><a href="https://github.com/akshatphumbhra/oberPoll">Github</a></li>
           </ul>
         </nav>
@@ -40,7 +42,7 @@
         {% if not session.get('user') %}
         <p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a></p>
         {% else %}
-        <p><a class="btn btn-lg btn-success" href="/createpoll" role="button">Create a poll</a></p>
+        <p><a class="btn btn-lg btn-success" href="/polls" role="button">Create a poll</a></p>
         {% endif %}
 
       </div>
@@ -75,6 +77,10 @@
             <button type="submit" name="submit" class="btn btn-success">Login</button>
           </form>
         </div>
+        {% else %}
+          <div id="container" class="row marketing">
+
+          </div>
         {% endif %}
       </div>
 
