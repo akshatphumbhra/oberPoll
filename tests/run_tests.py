@@ -69,7 +69,7 @@ class TestOberPoll():
                                      "options": self.poll['options']}).json()
         assert {'message': 'value for title is empty'} == result
 
-     def test_new_poll(self):
+    def test_new_poll(self):
         result = requests.post(self.hostname + '/api/polls', json=self.poll).json()
         assert {'message': 'Poll was successfully created!'} == result
 
