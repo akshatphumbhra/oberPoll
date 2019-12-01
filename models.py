@@ -18,12 +18,12 @@ class Topics(Base):
     title = db.Column(db.String(500))
     status = db.Column(db.Boolean, default =1)
 
-    create_uid = db.Column(db.ForeignKey('users.id'))
-    close_date = db.Column(db.DateTime)
+    #create_uid = db.Column(db.ForeignKey('users.id'))
+    #close_date = db.Column(db.DateTime)
 
-    created_by = db.relationship('Users', foreign_keys=[create_uid],
-                                 backref=db.backref('user_polls',
-                                 lazy='dynamic'))
+    # created_by = db.relationship('Users', foreign_keys=[create_uid],
+    #                              backref=db.backref('user_polls',
+    #                              lazy='dynamic'))
     #Representation of Topics class
     def __repr__(self):
         return self.title
@@ -34,10 +34,21 @@ class Topics(Base):
         'title':self.title,
         'options': [{'name': option.option.name, 'vote_count': option.vote_count} for option in self.options.all()],
         'status' : self.status,
-        'close_date': self.close_date,
+        #'close_date': self.close_date,
         'total_vote_count':self.total_vote_count
         }
-    
+
+    @hybrid_property
+    def total_vote_count(self, total=0):
+        for option in self.options.all():
+            total += option.vote_count
+
+        return total
+
+    @total_vote_count.expression
+    def total_vote_count(cls):
+        return select([func.sum(Polls.vote_count)]).where(Polls.topic_id == cls.id)
+
 #Model for poll options
 class Options(Base):
     name = db.Column(db.String(200), unique=True)
