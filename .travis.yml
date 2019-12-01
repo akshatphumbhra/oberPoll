@@ -4,4 +4,4 @@ rvm:
   -flask
 
 install: "pip install -r requirements.txt"
-script: python3 tests/run_tests.py
+script: nosetests -v
