@@ -1,9 +1,8 @@
-from votr import votr, db, celery
+from oberPoll import oberPoll, db
 from multiprocessing import Process
 import requests
 import os
 import time
-from tasks import close_poll
 
 
 class Testvotr():
