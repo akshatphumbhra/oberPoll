@@ -47,7 +47,7 @@ class TestOberPoll():
 
         print(result)
 
-        assert 'Thanks for signing up please login' in result
+        assert 'Congratulations! Your account has been created! Please login' in result
 
     def test_login(self):
 
