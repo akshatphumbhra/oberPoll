@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 
 <html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<head>
-      <meta charset = "utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../static/images/logo.jpeg">
+  <title>OberPoll!</title>
+
       <link rel="stylesheet" href="./static/css/bootstrap.min.css">
-			<link rel="stylesheet" type="text/css" href="./static/css/index.css">
+			<link rel="stylesheet" type="text/css" href="./static/css/poll.css">
+      <link rel="stylesheet" type="text/css" href="./static/css/view-port.css">
 
-      <title>OberPoll!</title>
 
-    <script src="https://npmcdn.com/react-router@2.8.1/umd/ReactRouter.min.js"></script>
+
+      <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+      <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+      <script src="https://npmcdn.com/react-router@2.8.1/umd/ReactRouter.min.js"></script>
+      <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+      <script type="text/babel" src="{{ url_for('static', filename='js/createpoll.js') }}"></script>
+
     <script src="./static/js/ie-emulation-modes-warning.js"></script>
+
 
   </head>
 
@@ -87,6 +102,6 @@
       <footer class="footer">
         <p>&copy; 2019 OberPoll</p>
       </footer>
-
+<script src="{{ url_for('static', filename='js/viewport-bug.js') }}"></script>
   </body>
 </html>
