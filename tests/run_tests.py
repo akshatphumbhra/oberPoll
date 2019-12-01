@@ -57,6 +57,23 @@ class TestOberPoll():
 
         assert 'Create a poll' in result
 
+    def test_empty_option(self):
+        result = requests.post(self.hostname + '/api/polls',
+                               json={"title": self.poll['title'],
+                                     "options": []}).json()
+        assert {'message': 'value for options is empty'} == result
+
+    def test_empty_title(self):
+        result = requests.post(self.hostname + '/api/polls',
+                               json={"title": "",
+                                     "options": self.poll['options']}).json()
+        assert {'message': 'value for title is empty'} == result
+
+     def test_new_poll(self):
+        result = requests.post(self.hostname + '/api/polls', json=self.poll).json()
+        assert {'message': 'Poll was successfully created!'} == result
+
+
     @classmethod
     def tearDownClass(cls):
         os.unlink(cls.DB_PATH)

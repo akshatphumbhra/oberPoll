@@ -124,7 +124,7 @@ def api_polls():
         db.session.add(new_topic)
         db.session.commit()
 
-        return jsonify({'message': 'Poll was successfully cretaed!'})
+        return jsonify({'message': 'Poll was successfully created!'})
 
     else:
         #Query the database and return all polls as JSON objects
