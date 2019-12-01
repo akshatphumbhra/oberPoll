@@ -5,7 +5,7 @@ import os
 import time
 
 
-class Testvotr():
+class TestOberPoll():
 
     @classmethod
     def setUpClass(cls):
@@ -44,6 +44,8 @@ class Testvotr():
                        'password': 'password'}
 
         result = requests.post(self.hostname + '/signup', data=signup_data).text
+
+        print(result)
 
         assert 'Thanks for signing up please login' in result
 
