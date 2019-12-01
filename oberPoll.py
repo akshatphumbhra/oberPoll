@@ -15,10 +15,12 @@ db.create_all(app=oberPoll)
 
 migrate = Migrate(oberPoll, db, render_as_batch=True)
 
+#Home page
 @oberPoll.route('/')
 def home():
     return render_template('index.html')
 
+#Signing up user
 @oberPoll.route('/signup', methods=['GET','POST'])
 def signup():
     #if Post
@@ -42,18 +44,13 @@ def signup():
 
     #Render the template if its a GET request
     return render_template('signup.html')
-# class index():
-#      id = db.Column(db.Integer, primary_key=True, unique=true, nullable=true) #does true and false need to be True and False
-#      name = db.Column(db.String(20), unique=true, nullable = false)
-#     # db.add({"name":"Akshat"})
-#     # db.commit()
-#     # print(db.query(1))
-#     return render_template("index.html")
 
+#Exists for no real reason
 @oberPoll.route('/favicon.ico')
 def test():
     return "This sucks!"
 
+#Logs user in
 @oberPoll.route('/login', methods =['POST'])
 def login():
 
@@ -75,6 +72,7 @@ def login():
 
     return redirect(url_for('home'))
 
+#Logs user out
 @oberPoll.route('/logout')
 def logout():
     if 'user' in session:
@@ -84,14 +82,17 @@ def logout():
 
     return redirect(url_for('home'))
 
+#Redirects to createpoll.html
 @oberPoll.route('/polls', methods=['GET'])
 def createPoll():
     return render_template('createpoll.html')
 
+#Redirects back to index as all polls show up there
 @oberPoll.route('/polls/<poll_name>')
 def poll():
     return render_template('index.html')
 
+#API endpoint that returns JSON object for specific poll (poll_name = title)
 @oberPoll.route('/api/poll/<poll_name>')
 def api_poll(poll_name):
     poll = Topics.query.filter(Topics.title.like(poll_name)).first()
@@ -117,15 +118,12 @@ def api_polls():
                         if options_query(option).count() == 0
                         else Polls(option=options_query(option).first()) for option in poll['options']]
 
-        #eta = datetime.utcfromtimestamp(poll['close_date'])
-        new_topic = Topics(title=title, options=options)#, close_date=eta)
+
+        new_topic = Topics(title=title, options=options)
 
         db.session.add(new_topic)
         db.session.commit()
 
-        #from tasks import close_poll
-
-        #close_poll.apply_async((new_topic.id, SQLALCHEMY_DATABASE_URI), eta=eta)
         return jsonify({'message': 'Poll was successfully cretaed!'})
 
     else:
@@ -136,47 +134,17 @@ def api_polls():
 
         return jsonify(all_polls)
 
+#Api end point that returns all options
 @oberPoll.route('/api/polls/options')
 def api_polls_options():
     all_options = [option.to_json() for option in Options.query.all()]
 
     return jsonify(all_options)
 
+#Api endpoint for voting
 @oberPoll.route('/api/poll/vote', methods=['PATCH'])
 def api_poll_vote():
-    # poll = request.get_json()
-    #
-    # poll_title, option = (poll['poll_title'], poll['option'])
-    #
-    # join_tables = Polls.query.join(Topics).join(Options)
-    #
-    #  # Get topic and username from the database
-    # topic = Topics.query.filter_by(title=poll_title, status=True).first()
-    # user = Users.query.filter_by(username=session['user']).first()
-    # # if poll was closed in the background before user voted
-    # if not topic:
-    #     return jsonify({'message': 'Sorry! this poll has been closed'})
-    #
-    # # filter options
-    # option = join_tables.filter(Topics.title.like(poll_title), Topics.status == True).filter(Options.name.like(option)).first()
-    #
-    # # check if the user has voted on this poll
-    # poll_count = UserPolls.query.filter_by(topic_id=topic.id).filter_by(user_id=user.id).count()
-    # if poll_count > 0:
-    #     return jsonify({'message': 'Sorry! multiple votes are not allowed'})
-    #
-    # if option:
-    #     # record user and poll
-    #     user_poll = UserPolls(topic_id=topic.id, user_id=user.id)
-    #     db.session.add(user_poll)
-    #
-    #     # increment vote_count by 1 if the option was found
-    #     option.vote_count += 1
-    #     db.session.commit()
-    #
-    #     return jsonify({'message': 'Thank you for voting!'})
-    #
-    # return jsonify({'message': 'Option or poll was not found. Please try again'})
+
     poll = request.get_json()
 
     poll_title, option = (poll['poll_title'], poll['option'])
@@ -196,43 +164,3 @@ def api_poll_vote():
 
 if __name__ == "__main__":
     oberPoll.run()
-
-# -- ---
-# -- Globals
-# -- ---
-#
-# -- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-# -- SET FOREIGN_KEY_CHECKS=0;
-#
-# -- ---
-# -- Table 'User'
-# --
-# -- ---
-#
-# DROP TABLE IF EXISTS `User`;
-#
-# CREATE TABLE `User` (
-#   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-#   `Name` VARCHAR(64) NULL DEFAULT NULL,
-#   `Paassword` VARCHAR(64) NULL DEFAULT NULL,
-#   `Student?` BINARY(8) NULL DEFAULT NULL,
-#   PRIMARY KEY (`id`)
-# );
-#
-# -- ---
-# -- Foreign Keys
-# -- ---
-#
-#
-# -- ---
-# -- Table Properties
-# -- ---
-#
-# -- ALTER TABLE `User` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-#
-# -- ---
-# -- Test Data
-# -- ---
-#
-# -- INSERT INTO `User` (`id`,`Name`,`Paassword`,`Student?`) VALUES
-# -- ('','','','');
