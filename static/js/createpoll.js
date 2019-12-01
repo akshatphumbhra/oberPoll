@@ -1,11 +1,7 @@
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var browserHistory = ReactRouter.browserHistory
-try {
-  var SimpleTimePicker = ReactSimpleTimePicker.SimpleTimePicker;
-}catch(err){
-  console.log(err);
-}
+
 
 // css style to align text to the center of it's container
 var Align = {
@@ -41,16 +37,13 @@ var PollForm = React.createClass({
   },
 
   handleOptionChange: function(e){
-
     this.setState({option: e.target.value});
   },
 
   handleOptionAdd: function(e){
     //update poll options and reset options to an empty string
-
     this.setState({
-
-    options: this.state.options.concat({'name':this.state.option}),
+    options: this.state.options.concat({name: this.state.option}),
     option: ''
     });
   },
@@ -102,7 +95,7 @@ var PollForm = React.createClass({
       data: JSON.stringify(data),
       contentType: 'application/json; charset=utf-8',
       success: function(data){
-        alert(data.message);
+        window.location.replace("/");
       }.bind(this),
       error: function(xhr, status, err){
         alert('Poll creation failed: ' + err.toString());
@@ -130,16 +123,14 @@ var PollForm = React.createClass({
 
         <div className="form-group has-success">
           <label htmlFor="option" className="sr-only">Option</label>
-          <input list="option" type="text" className="form-control" placeholder="Option" onChange={this.handleOptionChange}
-           value={this.state.option ? this.state.option: ''} autoFocus />
+          <input list="option" className="form-control" placeholder="Option" onChange={this.handleOptionChange}
+          value={this.state.option ? this.state.option: ''} autoFocus />
         </div>
 
         <datalist id="option">
           {all_options}
         </datalist>
 
-
-        <SimpleTimePicker days="7" onChange={this.onDateChange} />
         <br />
 
         <div className="row form-group">
@@ -218,7 +209,7 @@ var LivePreview = React.createClass({
               <br />
               <button type="submit" disabled={this.state.disabled}
               className="btn btn-success btn-outline hvr-grow">Vote!</button>
-              <small> {this.props.total_vote_count} Votes so far</small>
+              <small> {this.props.total_vote_count} votes so far</small>
               <small style={TimeLeft}> | {this.props.close_date}</small>
             </form>
           </div>
@@ -243,7 +234,6 @@ var LivePreviewProps = React.createClass({
       data: JSON.stringify(data),
       contentType: 'application/json; charset=utf-8',
       success: function(data){
-        alert(data.message);
         this.setState({selected_option: ''});
         this.props.loadPollsFromServer();
       }.bind(this),
@@ -257,28 +247,20 @@ var LivePreviewProps = React.createClass({
 
   render: function(){
     var polls = this.props.polls.Polls.map(function(poll){
+      var status = '';
 
-      var minutes = Math.floor((Date.parse(poll.close_date) - Date.now()) / (60000));
-      var time_remaining = '';
-
-      if(minutes > 1 && minutes < 59){
-        time_remaining += minutes + ' minutes remaining';
+      if(poll.status){
+        status = "Open";
+      }else {
+        status = "Closed";
       }
 
-      else if(minutes < 1380){
-        var hours =  Math.floor(minutes / 60);
-        time_remaining += hours + ' hours remaining';
-      }
 
-      else {
-        var days = Math.floor(minutes / (24 * 60));
-        time_remaining += days + ' days remaining';
-      }
 
       return (
         <LivePreview key={poll.title} title={poll.title} options={poll.options}
         total_vote_count={poll.total_vote_count} voteHandler={this.voteHandler}
-        close_date={time_remaining} classContext={this.props.classContext} />
+        close_date={status} classContext={this.props.classContext} />
     );
   }.bind(this));
 
