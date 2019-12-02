@@ -5,6 +5,9 @@ body {
   font-family: 'Cabin', sans-serif;
   font-size: 19px;
 }
+.jumbotron {
+  background-image: url(../images/poll.jpg)
+}
 
 .btn-success {
   color: #f56200;
@@ -38,7 +41,7 @@ body {
 }
 
 .message{
-  color: #ff9100;
+  color: #10cc00;
 }
 
 .welcome-message {
@@ -87,6 +90,7 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+  background-image: url(../images/polling.jpg)
   text-align: center;
   border-bottom: 1px solid #ff2a00;
 }

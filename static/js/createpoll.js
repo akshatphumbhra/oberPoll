@@ -291,7 +291,7 @@ var AllPolls = React.createClass({
 
     } else {
         var url = origin + '/api/polls'
-        this.setState({header: 'Latest polls', classContext: 'col-sm-6'})
+        this.setState({header: 'Open polls', classContext: 'col-sm-6'})
     }
 
     //make get request
