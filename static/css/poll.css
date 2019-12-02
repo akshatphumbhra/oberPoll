@@ -6,25 +6,31 @@ body {
   font-size: 19px;
 }
 
-
 .btn-success {
-  color: #666;
+  color: #f56200;
   border-radius: 30px;
   background-color: transparent;
-  border: 2px solid #4cae4c;
+  border: 2px solid #f56200;
 }
 
+.btn-success a {
+  background-color: #f56200;
+}
+
+.btn-success hover {
+  background-color: #ffcc00
+}
 .nav-pills > li > a {
-  color: #4cae4c;
+  color: #f56200;
   margin-top: 10px;
 }
 
 .nav-pills > li.active > a {
-  background-color: #4cae4c;
+  background-color: #f56200;
 }
 
 .nav-pills > li.active > a:hover {
-  background-color: #4cae4c;
+  background-color: #f56200;
 }
 
 .error {
@@ -32,7 +38,7 @@ body {
 }
 
 .message{
-  color: #449d44;
+  color: #ff9100;
 }
 
 .welcome-message {
@@ -53,7 +59,7 @@ body {
 /* Custom page header */
 .header {
   padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #ff2a00;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -66,7 +72,7 @@ body {
 .footer {
   padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #ff2a00;
 }
 
 /* Customize container */
@@ -82,7 +88,7 @@ body {
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #ff2a00;
 }
 .jumbotron .btn {
   padding: 14px 24px;
