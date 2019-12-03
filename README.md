@@ -11,30 +11,14 @@ A polling web application for improved classroom interactions.
 
 1) Clone the repository
 
-2) cd into it
+        https://github.com/akshatphumbhra/oberPoll.git
 
-3) Create a virtual environment with:
+2) Install the requirements
 
-$ py -m venv poll
+        $ pip install -r requirements.txt
 
-4) Activate your virtual environment
+3) Run the python app:
 
-$ poll\Scripts\activate
+        $ python3 oberPoll.py
 
-This should prepend "(poll)" to the start of the prompt
-
-5) Install the requirements
-
-$ pip install -r requirements.txt
-
-6) Run the python app:
-
-$ python3 oberPoll.py
-
-        OR
-
-$ python oberPoll.py
-
-Depending on your Python settings
-
-7) Navigate to the required url in your browser. By default this url is http://127.0.0.1:5000/
+4) Navigate to the required url in your browser. By default this url is http://127.0.0.1:5000/
