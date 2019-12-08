@@ -12,7 +12,12 @@ var Align = {
 var TimeLeft = {
   color: '#999',
   fontSize: '15px'
-}
+};
+
+var AlignRight = {
+  marginLeft: '80px',
+  textAlign: 'right'
+};
 
 //global variable to store origin url (e.g http://localhost:5000)
 var origin = window.location.origin;
@@ -212,7 +217,7 @@ var LivePreview = React.createClass({
                  <small> {this.props.total_vote_count} votes so far</small>
                  <small style={TimeLeft}> | {this.state.close_date}</small>
 
-                 <button onClick={this.closeHandler} style={{marginLeft: 0.5 +'em'}}
+                 <button onClick={this.closeHandler} style={AlignRight}
                  className="btn btn-danger btn-outline hvr-grow">Close</button>
 
                </form>
