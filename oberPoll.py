@@ -141,6 +141,25 @@ def api_polls_options():
 
     return jsonify(all_options)
 
+@oberPoll.route('/api/poll/close', methods=['PATCH'])
+def api_poll_close():
+    poll = request.get_json()
+
+    poll_title, close = (poll['poll_title'], poll['close'])
+
+    join_tables = Polls.query.join(Topics).join(Options)
+
+    topic = Topics.query.filter_by(title=poll_title, status=True).first()
+
+    if not topic:
+        return jsonify({'message': 'Poll not found'})
+
+    if close == 1:
+        topic.status = False
+        db.session.commit()
+
+    return jsonify({'message': 'The poll was closed'})
+
 #Api endpoint for voting
 @oberPoll.route('/api/poll/vote', methods=['PATCH'])
 def api_poll_vote():
@@ -150,6 +169,12 @@ def api_poll_vote():
     poll_title, option = (poll['poll_title'], poll['option'])
 
     join_tables = Polls.query.join(Topics).join(Options)
+
+    topic = Topics.query.filter_by(title=poll_title, status=True).first()
+    user = Users.query.filter_by(username=session['user']).first()
+
+    if not topic:
+        return jsonify({'message': 'Sorry! this poll has been closed'})
     # filter options
     option = join_tables.filter(Topics.title.like(poll_title)).filter(Options.name.like(option)).first()
 

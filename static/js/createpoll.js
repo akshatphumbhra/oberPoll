@@ -22,13 +22,7 @@ var PollForm = React.createClass({
   getInitialState: function(e){
     // set initial state of form inputs
 
-    // close poll in 24 hours by default
-    var close_date = new Date();
-    close_date.setHours(close_date.getHours() + 24);
-    close_date = close_date.getTime() / 1000;
-
-
-    return {title: '', option: '', options: [], close_date: close_date, all_options: []}
+    return {title: '', option: '', options: [], close_date: 'Open', all_options: []}
   },
 
   handleTitleChange: function(e){
@@ -46,13 +40,6 @@ var PollForm = React.createClass({
     options: this.state.options.concat({name: this.state.option}),
     option: ''
     });
-  },
-
-  onDateChange: function(e){
-    // convert date to UTC timestamp in seconds
-    var close_date = e.getTime() / 1000
-
-    this.setState({close_date: close_date})
   },
 
   componentDidMount: function(){
@@ -152,7 +139,7 @@ var PollForm = React.createClass({
 var LivePreview = React.createClass({
 
   getInitialState: function(){
-    return {selected_option: '', disabled: 0};
+    return {selected_option: '', disabled: 0, close_date: this.props.close_date};
   },
 
   handleOptionChange: function(e){
@@ -173,8 +160,20 @@ var LivePreview = React.createClass({
 
   },
 
+  closeHandler: function(e){
+    e.preventDefault();
+
+    var data = {"poll_title": this.props.title, "close": 1};
+
+    this.props.closeHandler(data);
+
+    this.setState({close_date: 'Closed'});
+  },
+
   render: function(){
+
     var options = this.props.options.map(function(option){
+
 
       if(option.name) {
 
@@ -196,31 +195,83 @@ var LivePreview = React.createClass({
       }
     }.bind(this));
 
-    return(
+     if (this.state.close_date == "Open"){
+       return(
 
-      <div className={this.props.classContext}>
-        <div className="panel panel-success">
-          <div className="panel-heading">
-            <h4>{this.props.title}</h4>
-          </div>
-          <div className="panel-body">
-            <form onSubmit={this.voteHandler}>
-              {options}
-              <br />
-              <button type="submit" disabled={this.state.disabled}
-              className="btn btn-success btn-outline hvr-grow">Vote!</button>
-              <small> {this.props.total_vote_count} votes so far</small>
-              <small style={TimeLeft}> | {this.props.close_date}</small>
-            </form>
-          </div>
-        </div>
-      </div>
-    )
+         <div className={this.props.classContext}>
+           <div className="panel panel-success">
+             <div className="panel-heading">
+               <h4>{this.props.title}</h4>
+             </div>
+             <div className="panel-body">
+               <form onSubmit={this.voteHandler}>
+                 {options}
+                 <br />
+                 <button type="submit" disabled={this.state.disabled}
+                 className="btn btn-success btn-outline hvr-grow">Vote!</button>
+                 <small> {this.props.total_vote_count} votes so far</small>
+                 <small style={TimeLeft}> | {this.state.close_date}</small>
+
+                 <button onClick={this.closeHandler} style={{marginLeft: 0.5 +'em'}}
+                 className="btn btn-danger btn-outline hvr-grow">Close</button>
+
+               </form>
+             </div>
+           </div>
+         </div>
+       )
+     }else {
+       return(
+
+         <div className={this.props.classContext}>
+           <div className="panel panel-success">
+             <div className="panel-heading">
+               <h4>{this.props.title}</h4>
+             </div>
+             <div className="panel-body">
+               <form onSubmit={this.voteHandler}>
+                 {options}
+                 <br />
+                 <button type="submit" disabled={this.state.disabled}
+                 className="btn btn-success btn-outline hvr-grow">Vote!</button>
+                 <small> {this.props.total_vote_count} votes so far</small>
+                 <small style={TimeLeft}> | {this.state.close_date}</small>
+
+               </form>
+             </div>
+           </div>
+         </div>
+       )
+     }
+
   }
 });
 
 
 var LivePreviewProps = React.createClass({
+
+  closeHandler: function(data){
+
+    this.setState({close_date:"Closed"});
+
+    var url = origin + '/api/poll/close'
+
+    // make patch request
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      type: 'PATCH',
+      data: JSON.stringify(data),
+      contentType: 'application/json; charset=utf-8',
+      success: function(data){
+        this.setState({close_date: 'Closed'});
+      }.bind(this),
+      error: function(xhr, status, err){
+        console.log('Poll close failed: ' + err.toString());
+      }.bind(this)
+    });
+
+  },
 
   voteHandler: function(data){
 
@@ -244,7 +295,6 @@ var LivePreviewProps = React.createClass({
 
   },
 
-
   render: function(){
     var polls = this.props.polls.Polls.map(function(poll){
       var status = '';
@@ -260,7 +310,7 @@ var LivePreviewProps = React.createClass({
       return (
         <LivePreview key={poll.title} title={poll.title} options={poll.options}
         total_vote_count={poll.total_vote_count} voteHandler={this.voteHandler}
-        close_date={status} classContext={this.props.classContext} />
+        closeHandler={this.closeHandler} close_date={status} classContext={this.props.classContext} />
     );
   }.bind(this));
 
